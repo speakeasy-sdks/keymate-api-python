@@ -1,0 +1,13 @@
+# PkbMatches
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `id`                                                                               | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | User's unique id with timestamp the data was inserted to long term memory.         |
+| `items`                                                                            | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `metadata`                                                                         | [Optional[operations.PkbMetadata]](../../models/operations/pkbmetadata.md)         | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `score`                                                                            | *Optional[float]*                                                                  | :heavy_minus_sign:                                                                 | How close was the results to your query                                            |
+| `sparse_values`                                                                    | [Optional[operations.PkbSparseValues]](../../models/operations/pkbsparsevalues.md) | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `values`                                                                           | List[*str*]                                                                        | :heavy_minus_sign:                                                                 | N/A                                                                                |
