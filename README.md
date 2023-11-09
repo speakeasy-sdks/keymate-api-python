@@ -15,7 +15,7 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 - [ ] 🎁 Publish your SDK to package managers by [configuring automatic publishing](https://www.speakeasyapi.dev/docs/productionize-sdks/publish-sdks)
 - [ ] ✨ When ready to productionize, delete this section from the README
 <!-- Start SDK Installation -->
-# SDK Installation
+## SDK Installation
 
 ```bash
 pip install Keymate-API
@@ -24,8 +24,6 @@ pip install Keymate-API
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
-
-
 ```python
 import keymate_api
 from keymate_api.models import operations
@@ -44,9 +42,9 @@ if res.two_hundred_application_json_object is not None:
 <!-- End SDK Example Usage -->
 
 <!-- Start SDK Available Operations -->
-# Available Resources and Operations
+## Available Resources and Operations
 
-## [KeymateAPI SDK](docs/sdks/keymateapi/README.md)
+### [KeymateAPI SDK](docs/sdks/keymateapi/README.md)
 
 * [browse](docs/sdks/keymateapi/README.md#browse) - The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.
 * [browse_by_url](docs/sdks/keymateapi/README.md#browse_by_url) - The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.
@@ -79,14 +77,17 @@ if res.two_hundred_application_json_object is not None:
 
 <!-- Start Dev Containers -->
 
-
-
 <!-- End Dev Containers -->
 
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will raise the appropriate Error type.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will raise the appropriate Error type.
+
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| errors.BrowseResponseBody | 400                       | application/json          |
+| errors.SDKError           | 400-600                   | */*                       |
 
 
 ## Example
@@ -103,10 +104,11 @@ s = keymate_api.KeymateAPI(
 res = None
 try:
     res = s.browse(numofpages='string', percentile='string', q='http://impressive-silence.info', paging='string')
-
-except (400_application/json_object) as e:
+except (errors.BrowseResponseBody) as e:
     print(e) # handle exception
 
+except (errors.SDKError) as e:
+    print(e) # handle exception
 
 
 if res.two_hundred_application_json_object is not None:
@@ -174,7 +176,7 @@ if res.two_hundred_application_json_object is not None:
 The Python SDK makes API calls using the (requests)[https://pypi.org/project/requests/] HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `requests.Session` object.
 
 
-For example, you could specify a header for every request that your sdk makes as follows:
+For example, you could specify a header for every request that this sdk makes as follows:
 
 ```python
 import keymate_api
@@ -184,17 +186,14 @@ http_client = requests.Session()
 http_client.headers.update({'x-custom-header': 'someValue'})
 s = keymate_api.KeymateAPI(client: http_client)
 ```
-
-
 <!-- End Custom HTTP Client -->
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security scheme globally:
+This SDK supports the following security scheme globally:
 
 | Name          | Type          | Scheme        |
 | ------------- | ------------- | ------------- |

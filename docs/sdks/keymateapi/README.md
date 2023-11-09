@@ -70,7 +70,12 @@ if res.two_hundred_application_json_object is not None:
 ### Response
 
 **[operations.BrowseResponse](../../models/operations/browseresponse.md)**
+### Errors
 
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| errors.BrowseResponseBody | 400                       | application/json          |
+| errors.SDKError           | 400-600                   | */*                       |
 
 ## browse_by_url
 
@@ -107,7 +112,12 @@ if res.two_hundred_application_json_object is not None:
 ### Response
 
 **[operations.BrowseByURLResponse](../../models/operations/browsebyurlresponse.md)**
+### Errors
 
+| Error Object                   | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| errors.BrowseByURLResponseBody | 400                            | application/json               |
+| errors.SDKError                | 400-600                        | */*                            |
 
 ## document
 
@@ -143,7 +153,11 @@ if res.object is not None:
 ### Response
 
 **[operations.DocumentResponse](../../models/operations/documentresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## fast
 
@@ -179,7 +193,12 @@ if res.two_hundred_application_json_object is not None:
 ### Response
 
 **[operations.FastResponse](../../models/operations/fastresponse.md)**
+### Errors
 
+| Error Object            | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| errors.FastResponseBody | 400                     | application/json        |
+| errors.SDKError         | 400-600                 | */*                     |
 
 ## halloween
 
@@ -206,7 +225,11 @@ if res.object is not None:
 ### Response
 
 **[operations.HalloweenResponse](../../models/operations/halloweenresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## help
 
@@ -233,7 +256,11 @@ if res.object is not None:
 ### Response
 
 **[operations.HelpResponse](../../models/operations/helpresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## hybrid
 
@@ -269,7 +296,12 @@ if res.two_hundred_application_json_object is not None:
 ### Response
 
 **[operations.HybridResponse](../../models/operations/hybridresponse.md)**
+### Errors
 
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| errors.HybridResponseBody | 400                       | application/json          |
+| errors.SDKError           | 400-600                   | */*                       |
 
 ## insert
 
@@ -303,7 +335,11 @@ if res.object is not None:
 ### Response
 
 **[operations.InsertResponse](../../models/operations/insertresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## keymate
 
@@ -339,7 +375,12 @@ if res.two_hundred_application_json_object is not None:
 ### Response
 
 **[operations.KeymateResponse](../../models/operations/keymateresponse.md)**
+### Errors
 
+| Error Object               | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.KeymateResponseBody | 400                        | application/json           |
+| errors.SDKError            | 400-600                    | */*                        |
 
 ## list
 
@@ -366,7 +407,11 @@ if res.object is not None:
 ### Response
 
 **[operations.ListResponse](../../models/operations/listresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## listpdfs
 
@@ -393,7 +438,11 @@ if res.object is not None:
 ### Response
 
 **[operations.ListpdfsResponse](../../models/operations/listpdfsresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## metadatakb
 
@@ -427,7 +476,11 @@ if res.object is not None:
 ### Response
 
 **[operations.MetadatakbResponse](../../models/operations/metadatakbresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## pdfload
 
@@ -454,7 +507,11 @@ if res.object is not None:
 ### Response
 
 **[operations.PdfloadResponse](../../models/operations/pdfloadresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## pdfpro
 
@@ -490,7 +547,11 @@ if res.object is not None:
 ### Response
 
 **[operations.PdfproResponse](../../models/operations/pdfproresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## pdfsearch
 
@@ -524,7 +585,11 @@ if res.object is not None:
 ### Response
 
 **[operations.PdfsearchResponse](../../models/operations/pdfsearchresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## pkb
 
@@ -558,7 +623,11 @@ if res.object is not None:
 ### Response
 
 **[operations.PkbResponse](../../models/operations/pkbresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## query
 
@@ -592,7 +661,11 @@ if res.object is not None:
 ### Response
 
 **[operations.QueryResponse](../../models/operations/queryresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## query_users_knowledge_base
 
@@ -626,7 +699,11 @@ if res.object is not None:
 ### Response
 
 **[operations.QueryUsersKnowledgeBaseResponse](../../models/operations/queryusersknowledgebaseresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## reset_users_knowledge_base
 
@@ -660,7 +737,11 @@ if res.object is not None:
 ### Response
 
 **[operations.ResetUsersKnowledgeBaseResponse](../../models/operations/resetusersknowledgebaseresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## resetknowledgebase
 
@@ -694,7 +775,11 @@ if res.object is not None:
 ### Response
 
 **[operations.ResetknowledgebaseResponse](../../models/operations/resetknowledgebaseresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## savetopkb
 
@@ -728,7 +813,11 @@ if res.object is not None:
 ### Response
 
 **[operations.SavetopkbResponse](../../models/operations/savetopkbresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## search
 
@@ -764,7 +853,12 @@ if res.two_hundred_application_json_object is not None:
 ### Response
 
 **[operations.SearchResponse](../../models/operations/searchresponse.md)**
+### Errors
 
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| errors.SearchResponseBody | 400                       | application/json          |
+| errors.SDKError           | 400-600                   | */*                       |
 
 ## search_and_browse
 
@@ -800,7 +894,12 @@ if res.two_hundred_application_json_object is not None:
 ### Response
 
 **[operations.SearchAndBrowseResponse](../../models/operations/searchandbrowseresponse.md)**
+### Errors
 
+| Error Object                       | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.SearchAndBrowseResponseBody | 400                                | application/json                   |
+| errors.SDKError                    | 400-600                            | */*                                |
 
 ## ultrafastsearch
 
@@ -836,7 +935,12 @@ if res.two_hundred_application_json_object is not None:
 ### Response
 
 **[operations.UltrafastsearchResponse](../../models/operations/ultrafastsearchresponse.md)**
+### Errors
 
+| Error Object                       | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.UltrafastsearchResponseBody | 400                                | application/json                   |
+| errors.SDKError                    | 400-600                            | */*                                |
 
 ## upsert
 
@@ -870,7 +974,11 @@ if res.object is not None:
 ### Response
 
 **[operations.UpsertResponse](../../models/operations/upsertresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## upsert_to_users_knowledge_base
 
@@ -904,7 +1012,11 @@ if res.object is not None:
 ### Response
 
 **[operations.UpsertToUsersKnowledgeBaseResponse](../../models/operations/upserttousersknowledgebaseresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## upsertjson
 
@@ -941,4 +1053,8 @@ if res.object is not None:
 ### Response
 
 **[operations.UpsertjsonResponse](../../models/operations/upsertjsonresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |

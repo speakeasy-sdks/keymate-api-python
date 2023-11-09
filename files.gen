@@ -183,6 +183,6 @@ docs/models/errors/keymateresponsebody.md
 docs/models/errors/searchresponsebody.md
 docs/models/errors/searchandbrowseresponsebody.md
 docs/models/errors/ultrafastsearchresponsebody.md
-docs/models/shared/security.md
+docs/models/components/security.md
 docs/sdks/keymateapi/README.md
 .gitattributes
