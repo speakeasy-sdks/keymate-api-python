@@ -60,13 +60,13 @@ class SearchAndBrowseResponseBody:
 class SearchAndBrowseResponse:
     content_type: str = dataclasses.field()
     r"""HTTP response content type for this operation"""
+    raw_response: requests_http.Response = dataclasses.field()
+    r"""Raw HTTP response; suitable for custom response parsing"""
     status_code: int = dataclasses.field()
     r"""HTTP response status code for this operation"""
     two_hundred_application_json_object: Optional[SearchAndBrowseResponseBody] = dataclasses.field(default=None)
     r"""Successful operation"""
     default_application_json_object: Optional[SearchAndBrowseResponseDefaultResponseBody] = dataclasses.field(default=None)
     r"""Error fetching search results"""
-    raw_response: Optional[requests_http.Response] = dataclasses.field(default=None)
-    r"""Raw HTTP response; suitable for custom response parsing"""
     
 

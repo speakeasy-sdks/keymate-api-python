@@ -60,13 +60,13 @@ class FastResponseBody:
 class FastResponse:
     content_type: str = dataclasses.field()
     r"""HTTP response content type for this operation"""
+    raw_response: requests_http.Response = dataclasses.field()
+    r"""Raw HTTP response; suitable for custom response parsing"""
     status_code: int = dataclasses.field()
     r"""HTTP response status code for this operation"""
     two_hundred_application_json_object: Optional[FastResponseBody] = dataclasses.field(default=None)
     r"""Successful operation"""
     default_application_json_object: Optional[FastResponseDefaultResponseBody] = dataclasses.field(default=None)
     r"""Error fetching search results"""
-    raw_response: Optional[requests_http.Response] = dataclasses.field(default=None)
-    r"""Raw HTTP response; suitable for custom response parsing"""
     
 

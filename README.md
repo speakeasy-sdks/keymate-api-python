@@ -24,6 +24,8 @@ pip install Keymate-API
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
+### Example
+
 ```python
 import keymate_api
 from keymate_api.models import operations
@@ -80,7 +82,7 @@ if res.two_hundred_application_json_object is not None:
 <!-- End Dev Containers -->
 
 <!-- Start Error Handling -->
-# Error Handling
+## Error Handling
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will raise the appropriate Error type.
 
@@ -89,8 +91,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 | errors.BrowseResponseBody | 400                       | application/json          |
 | errors.SDKError           | 400-600                   | */*                       |
 
-
-## Example
+### Example
 
 ```python
 import keymate_api
@@ -118,9 +119,9 @@ if res.two_hundred_application_json_object is not None:
 <!-- End Error Handling -->
 
 <!-- Start Server Selection -->
-# Server Selection
+## Server Selection
 
-## Select Server by Index
+### Select Server by Index
 
 You can override the default server globally by passing a server index to the `server_idx: int` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
@@ -128,7 +129,7 @@ You can override the default server globally by passing a server index to the `s
 | - | ------ | --------- |
 | 0 | `https://server.searchweb.keymate.ai` | None |
 
-For example:
+#### Example
 
 ```python
 import keymate_api
@@ -148,10 +149,9 @@ if res.two_hundred_application_json_object is not None:
 ```
 
 
-## Override Server URL Per-Client
+### Override Server URL Per-Client
 
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
-
 ```python
 import keymate_api
 from keymate_api.models import operations
@@ -171,13 +171,11 @@ if res.two_hundred_application_json_object is not None:
 <!-- End Server Selection -->
 
 <!-- Start Custom HTTP Client -->
-# Custom HTTP Client
+## Custom HTTP Client
 
 The Python SDK makes API calls using the (requests)[https://pypi.org/project/requests/] HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `requests.Session` object.
 
-
 For example, you could specify a header for every request that this sdk makes as follows:
-
 ```python
 import keymate_api
 import requests
@@ -189,9 +187,9 @@ s = keymate_api.KeymateAPI(client: http_client)
 <!-- End Custom HTTP Client -->
 
 <!-- Start Authentication -->
-# Authentication
+## Authentication
 
-## Per-Client Security Schemes
+### Per-Client Security Schemes
 
 This SDK supports the following security scheme globally:
 
@@ -200,7 +198,6 @@ This SDK supports the following security scheme globally:
 | `bearer_auth` | http          | HTTP Bearer   |
 
 To authenticate with the API the `bearer_auth` parameter must be set when initializing the SDK client instance. For example:
-
 ```python
 import keymate_api
 from keymate_api.models import operations
