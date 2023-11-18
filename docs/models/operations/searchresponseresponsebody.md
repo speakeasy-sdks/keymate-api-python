@@ -1,4 +1,4 @@
-# SearchAndBrowseResponseDefaultResponseBody
+# SearchResponseResponseBody
 
 Error fetching search results
 

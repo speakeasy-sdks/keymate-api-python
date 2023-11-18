@@ -1,4 +1,4 @@
-# HybridResponseDefaultResponseBody
+# UltrafastsearchResponseResponseBody
 
 Error fetching search results
 

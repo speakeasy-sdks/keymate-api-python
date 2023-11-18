@@ -1,4 +1,4 @@
-# UltrafastsearchResponseDefaultResponseBody
+# BrowseByURLResponseResponseBody
 
 Error fetching search results
 

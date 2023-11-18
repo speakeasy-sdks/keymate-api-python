@@ -1,4 +1,4 @@
-# BrowseResponseDefaultResponseBody
+# FastResponseResponseBody
 
 Error fetching search results
 

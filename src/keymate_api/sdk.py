@@ -96,7 +96,7 @@ class KeymateAPI:
             raise errors.SDKError('API error occurred', http_res.status_code, http_res.text, http_res)
         else:
             if utils.match_content_type(content_type, 'application/json'):
-                out = utils.unmarshal_json(http_res.text, Optional[operations.BrowseResponseDefaultResponseBody])
+                out = utils.unmarshal_json(http_res.text, Optional[operations.BrowseResponseResponseBody])
                 res.default_application_json_object = out
             else:
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
@@ -151,7 +151,7 @@ class KeymateAPI:
             raise errors.SDKError('API error occurred', http_res.status_code, http_res.text, http_res)
         else:
             if utils.match_content_type(content_type, 'application/json'):
-                out = utils.unmarshal_json(http_res.text, Optional[operations.BrowseByURLResponseDefaultResponseBody])
+                out = utils.unmarshal_json(http_res.text, Optional[operations.BrowseByURLResponseResponseBody])
                 res.default_application_json_object = out
             else:
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
@@ -246,7 +246,7 @@ class KeymateAPI:
             raise errors.SDKError('API error occurred', http_res.status_code, http_res.text, http_res)
         else:
             if utils.match_content_type(content_type, 'application/json'):
-                out = utils.unmarshal_json(http_res.text, Optional[operations.FastResponseDefaultResponseBody])
+                out = utils.unmarshal_json(http_res.text, Optional[operations.FastResponseResponseBody])
                 res.default_application_json_object = out
             else:
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
@@ -368,7 +368,7 @@ class KeymateAPI:
             raise errors.SDKError('API error occurred', http_res.status_code, http_res.text, http_res)
         else:
             if utils.match_content_type(content_type, 'application/json'):
-                out = utils.unmarshal_json(http_res.text, Optional[operations.HybridResponseDefaultResponseBody])
+                out = utils.unmarshal_json(http_res.text, Optional[operations.HybridResponseResponseBody])
                 res.default_application_json_object = out
             else:
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
@@ -461,7 +461,7 @@ class KeymateAPI:
             raise errors.SDKError('API error occurred', http_res.status_code, http_res.text, http_res)
         else:
             if utils.match_content_type(content_type, 'application/json'):
-                out = utils.unmarshal_json(http_res.text, Optional[operations.KeymateResponseDefaultResponseBody])
+                out = utils.unmarshal_json(http_res.text, Optional[operations.KeymateResponseResponseBody])
                 res.default_application_json_object = out
             else:
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
@@ -970,7 +970,7 @@ class KeymateAPI:
             raise errors.SDKError('API error occurred', http_res.status_code, http_res.text, http_res)
         else:
             if utils.match_content_type(content_type, 'application/json'):
-                out = utils.unmarshal_json(http_res.text, Optional[operations.SearchResponseDefaultResponseBody])
+                out = utils.unmarshal_json(http_res.text, Optional[operations.SearchResponseResponseBody])
                 res.default_application_json_object = out
             else:
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
@@ -1024,7 +1024,7 @@ class KeymateAPI:
             raise errors.SDKError('API error occurred', http_res.status_code, http_res.text, http_res)
         else:
             if utils.match_content_type(content_type, 'application/json'):
-                out = utils.unmarshal_json(http_res.text, Optional[operations.SearchAndBrowseResponseDefaultResponseBody])
+                out = utils.unmarshal_json(http_res.text, Optional[operations.SearchAndBrowseResponseResponseBody])
                 res.default_application_json_object = out
             else:
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
@@ -1078,7 +1078,7 @@ class KeymateAPI:
             raise errors.SDKError('API error occurred', http_res.status_code, http_res.text, http_res)
         else:
             if utils.match_content_type(content_type, 'application/json'):
-                out = utils.unmarshal_json(http_res.text, Optional[operations.UltrafastsearchResponseDefaultResponseBody])
+                out = utils.unmarshal_json(http_res.text, Optional[operations.UltrafastsearchResponseResponseBody])
                 res.default_application_json_object = out
             else:
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)

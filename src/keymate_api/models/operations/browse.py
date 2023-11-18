@@ -24,7 +24,7 @@ class BrowseRequest:
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
-class BrowseResponseDefaultResponseBody:
+class BrowseResponseResponseBody:
     r"""Error fetching search results"""
     error: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('error'), 'exclude': lambda f: f is None }})
     r"""Error message"""
@@ -68,7 +68,7 @@ class BrowseResponse:
     r"""HTTP response status code for this operation"""
     two_hundred_application_json_object: Optional[BrowseResponseBody] = dataclasses.field(default=None)
     r"""Successful operation"""
-    default_application_json_object: Optional[BrowseResponseDefaultResponseBody] = dataclasses.field(default=None)
+    default_application_json_object: Optional[BrowseResponseResponseBody] = dataclasses.field(default=None)
     r"""Error fetching search results"""
     
 

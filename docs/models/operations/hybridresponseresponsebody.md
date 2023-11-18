@@ -1,4 +1,4 @@
-# KeymateResponseDefaultResponseBody
+# HybridResponseResponseBody
 
 Error fetching search results
 
