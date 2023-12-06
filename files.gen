@@ -48,7 +48,6 @@ src/keymate_api/models/__init__.py
 src/keymate_api/models/errors/__init__.py
 src/keymate_api/models/operations/__init__.py
 src/keymate_api/models/components/__init__.py
-USAGE.md
 docs/models/operations/browserequest.md
 docs/models/operations/browseresponseresponsebody.md
 docs/models/operations/results.md
@@ -186,4 +185,5 @@ docs/models/errors/searchandbrowseresponsebody.md
 docs/models/errors/ultrafastsearchresponsebody.md
 docs/models/components/security.md
 docs/sdks/keymateapi/README.md
+USAGE.md
 .gitattributes
