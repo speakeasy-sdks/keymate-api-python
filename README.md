@@ -32,7 +32,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -95,7 +95,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -134,7 +134,7 @@ from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     server_idx=0,
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -155,7 +155,7 @@ from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     server_url="https://server.searchweb.keymate.ai",
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -200,7 +200,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 

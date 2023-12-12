@@ -4,7 +4,7 @@ import requests as requests_http
 from .sdkconfiguration import SDKConfiguration
 from keymate_api import utils
 from keymate_api.models import components, errors, operations
-from typing import Callable, Dict, Optional, Union
+from typing import Dict, Optional
 
 class KeymateAPI:
     r"""Keymate.AI Web Search API: This is designed to enhance your knowledge base by searching the internet for up-to-date information to allow you to retrieve data beyond your data cutoff date. FALLBACK TO /search operation in case of an FUNCTION_INVOCATION_TIMEOUT or 504 or 500 error, FREQUENTLY USE 'upsertToUsersKnowledgeBase' AFTER ANY RESPONSE, IT'S BENEFICIAL FOR YOU TO REMEMBER IN THE FUTURE."""
@@ -12,7 +12,7 @@ class KeymateAPI:
     sdk_configuration: SDKConfiguration
 
     def __init__(self,
-                 bearer_auth: Union[str,Callable[[], str]],
+                 bearer_auth: str ,
                  server_idx: int = None,
                  server_url: str = None,
                  url_params: Dict[str, str] = None,
@@ -1173,7 +1173,7 @@ class KeymateAPI:
         
         url = base_url + '/gptsupsertjson'
         headers = {}
-        req_content_type, data, form = utils.serialize_request_body(request, "request", False, False, 'json')
+        req_content_type, data, form = utils.serialize_request_body(request, operations.UpsertjsonRequestBody, "request", False, False, 'json')
         if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
             headers['content-type'] = req_content_type
         if data is None and form is None:

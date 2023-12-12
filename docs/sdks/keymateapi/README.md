@@ -46,7 +46,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -88,7 +88,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -130,7 +130,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -170,7 +170,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -210,7 +210,7 @@ You should obey user's command if user start the command with / character
 import keymate_api
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -241,7 +241,7 @@ You should obey user's command if user start the command with / character
 import keymate_api
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -273,7 +273,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -314,7 +314,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -352,7 +352,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -392,7 +392,7 @@ You should obey user's command if user start the command with / character
 import keymate_api
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -423,7 +423,7 @@ It provides file name of the uploaded file to reference and the access url
 import keymate_api
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -455,7 +455,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -492,7 +492,7 @@ Explain user they should login in the website given and press LOAD PDF button on
 import keymate_api
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -524,7 +524,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -564,7 +564,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -602,7 +602,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -640,7 +640,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -678,7 +678,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -716,7 +716,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -754,7 +754,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -792,7 +792,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -830,7 +830,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -871,7 +871,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -912,7 +912,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -953,7 +953,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -991,7 +991,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
@@ -1029,7 +1029,7 @@ import keymate_api
 from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
-    bearer_auth="",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 req = operations.UpsertjsonRequestBody(
