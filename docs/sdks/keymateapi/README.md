@@ -75,7 +75,7 @@ if res.two_hundred_application_json_object is not None:
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | errors.BrowseResponseBody | 400                       | application/json          |
-| errors.SDKError           | 400-600                   | */*                       |
+| errors.SDKError           | 4x-5xx                    | */*                       |
 
 ## browse_by_url
 
@@ -117,7 +117,7 @@ if res.two_hundred_application_json_object is not None:
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | errors.BrowseByURLResponseBody | 400                            | application/json               |
-| errors.SDKError                | 400-600                        | */*                            |
+| errors.SDKError                | 4x-5xx                         | */*                            |
 
 ## document
 
@@ -157,7 +157,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## fast
 
@@ -198,7 +198,7 @@ if res.two_hundred_application_json_object is not None:
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | errors.FastResponseBody | 400                     | application/json        |
-| errors.SDKError         | 400-600                 | */*                     |
+| errors.SDKError         | 4x-5xx                  | */*                     |
 
 ## halloween
 
@@ -229,7 +229,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## help
 
@@ -260,7 +260,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## hybrid
 
@@ -301,7 +301,7 @@ if res.two_hundred_application_json_object is not None:
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | errors.HybridResponseBody | 400                       | application/json          |
-| errors.SDKError           | 400-600                   | */*                       |
+| errors.SDKError           | 4x-5xx                    | */*                       |
 
 ## insert
 
@@ -339,7 +339,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## keymate
 
@@ -380,7 +380,7 @@ if res.two_hundred_application_json_object is not None:
 | Error Object               | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.KeymateResponseBody | 400                        | application/json           |
-| errors.SDKError            | 400-600                    | */*                        |
+| errors.SDKError            | 4x-5xx                     | */*                        |
 
 ## list
 
@@ -411,7 +411,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## listpdfs
 
@@ -442,7 +442,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## metadatakb
 
@@ -480,7 +480,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## pdfload
 
@@ -511,7 +511,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## pdfpro
 
@@ -551,7 +551,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## pdfsearch
 
@@ -589,7 +589,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## pkb
 
@@ -627,7 +627,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## query
 
@@ -665,7 +665,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## query_users_knowledge_base
 
@@ -703,7 +703,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## reset_users_knowledge_base
 
@@ -741,7 +741,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## resetknowledgebase
 
@@ -779,7 +779,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## savetopkb
 
@@ -817,7 +817,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## search
 
@@ -858,7 +858,7 @@ if res.two_hundred_application_json_object is not None:
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | errors.SearchResponseBody | 400                       | application/json          |
-| errors.SDKError           | 400-600                   | */*                       |
+| errors.SDKError           | 4x-5xx                    | */*                       |
 
 ## search_and_browse
 
@@ -899,7 +899,7 @@ if res.two_hundred_application_json_object is not None:
 | Error Object                       | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
 | errors.SearchAndBrowseResponseBody | 400                                | application/json                   |
-| errors.SDKError                    | 400-600                            | */*                                |
+| errors.SDKError                    | 4x-5xx                             | */*                                |
 
 ## ultrafastsearch
 
@@ -940,7 +940,7 @@ if res.two_hundred_application_json_object is not None:
 | Error Object                       | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
 | errors.UltrafastsearchResponseBody | 400                                | application/json                   |
-| errors.SDKError                    | 400-600                            | */*                                |
+| errors.SDKError                    | 4x-5xx                             | */*                                |
 
 ## upsert
 
@@ -978,7 +978,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## upsert_to_users_knowledge_base
 
@@ -1016,7 +1016,7 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## upsertjson
 
@@ -1057,4 +1057,4 @@ if res.object is not None:
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4x-5xx          | */*             |
