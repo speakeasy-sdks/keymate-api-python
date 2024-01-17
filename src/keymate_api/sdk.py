@@ -4,7 +4,7 @@ import requests as requests_http
 from .sdkconfiguration import SDKConfiguration
 from keymate_api import utils
 from keymate_api.models import components, errors, operations
-from typing import Dict, Optional
+from typing import Callable, Dict, Optional, Union
 
 class KeymateAPI:
     r"""Keymate.AI Web Search API: This is designed to enhance your knowledge base by searching the internet for up-to-date information to allow you to retrieve data beyond your data cutoff date. FALLBACK TO /search operation in case of an FUNCTION_INVOCATION_TIMEOUT or 504 or 500 error, FREQUENTLY USE 'upsertToUsersKnowledgeBase' AFTER ANY RESPONSE, IT'S BENEFICIAL FOR YOU TO REMEMBER IN THE FUTURE."""
@@ -12,7 +12,7 @@ class KeymateAPI:
     sdk_configuration: SDKConfiguration
 
     def __init__(self,
-                 bearer_auth: str ,
+                 bearer_auth: Union[str, Callable[[], str]],
                  server_idx: int = None,
                  server_url: str = None,
                  url_params: Dict[str, str] = None,
@@ -22,7 +22,7 @@ class KeymateAPI:
         """Instantiates the SDK configuring it with the provided parameters.
         
         :param bearer_auth: The bearer_auth required for authentication
-        :type bearer_auth: Union[str,Callable[[], str]]
+        :type bearer_auth: Union[str, Callable[[], str]]
         :param server_idx: The index of the server to use for all operations
         :type server_idx: int
         :param server_url: The server URL to use for all operations
@@ -37,7 +37,11 @@ class KeymateAPI:
         if client is None:
             client = requests_http.Session()
         
-        security = components.Security(bearer_auth = bearer_auth)
+        if callable(bearer_auth):
+            def security():
+                return components.Security(bearer_auth = bearer_auth())
+        else:
+            security = components.Security(bearer_auth = bearer_auth)
         
         if server_url is not None:
             if url_params is not None:
