@@ -4,16 +4,16 @@ management:
   docChecksum: 7ba09a9986f7230b7abacf151bbb031b
   docVersion: 1.0.1
   speakeasyVersion: internal
-  generationVersion: 2.245.1
-  releaseVersion: 0.3.5
-  configChecksum: 5e9fae76ea889d6c3a0f1974b696982c
+  generationVersion: 2.248.1
+  releaseVersion: 0.4.0
+  configChecksum: f94880d6c4ae69e0512ee8602378ee68
   repoURL: https://github.com/speakeasy-sdks/keymate-api-python.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/keymate-api-python.git
   published: true
 features:
   python:
-    core: 4.4.3
+    core: 4.4.4
     flattening: 2.81.1
     globalSecurity: 2.83.2
     globalServerURLs: 2.82.1
