@@ -13,10 +13,10 @@ from typing import Optional
 @dataclasses.dataclass
 class UltrafastsearchResponseBody(Exception):
     r"""Bad request"""
-    error: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('error'), 'exclude': lambda f: f is None }})
-    r"""Error message"""
     raw_response: Optional[requests_http.Response] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     r"""Raw HTTP response; suitable for custom response parsing"""
+    error: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('error'), 'exclude': lambda f: f is None }})
+    r"""Error message"""
     
 
     def __str__(self) -> str:
