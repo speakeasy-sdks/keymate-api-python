@@ -1,7 +1,6 @@
 <!-- Start SDK Example Usage [usage] -->
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",

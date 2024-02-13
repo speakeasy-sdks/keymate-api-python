@@ -29,7 +29,6 @@ pip install Keymate-API
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -92,7 +91,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 
 ```python
 import keymate_api
-from keymate_api.models import operations
+from keymate_api.models import errors
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -103,10 +102,10 @@ res = None
 try:
     res = s.browse(numofpages='string', percentile='string', q='http://impressive-silence.info', paging='string')
 except errors.BrowseResponseBody as e:
-    print(e)  # handle exception
+    # handle exception
     raise(e)
 except errors.SDKError as e:
-    print(e)  # handle exception
+    # handle exception
     raise(e)
 
 if res.two_hundred_application_json_object is not None:
@@ -130,7 +129,6 @@ You can override the default server globally by passing a server index to the `s
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     server_idx=0,
@@ -151,7 +149,6 @@ if res.two_hundred_application_json_object is not None:
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     server_url="https://server.searchweb.keymate.ai",
@@ -197,7 +194,6 @@ This SDK supports the following security scheme globally:
 To authenticate with the API the `bearer_auth` parameter must be set when initializing the SDK client instance. For example:
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",

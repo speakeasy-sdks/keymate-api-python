@@ -43,7 +43,6 @@ Use this endpoint to gather more data from a specific URL with HTTP or HTTPS pro
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -85,7 +84,6 @@ Use this endpoint to gather more data from a specific URL with HTTP or HTTPS pro
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -127,7 +125,6 @@ Use this when you have fileUrl from listpdfs operation or fileName given by user
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -167,7 +164,6 @@ This plugin uses official Google Plugin so it provides the fastest results avail
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -270,7 +266,6 @@ Searches internet and personal knowledge base using the provided query that is r
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -311,7 +306,6 @@ Use it automatically to insert your last response to remember the context in fol
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -349,7 +343,6 @@ Searches internet using the provided query that is recreated by ChatGPT and retu
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -452,7 +445,6 @@ It brings the metadata about knowledge base. Shows number of records and a sampl
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -521,7 +513,6 @@ Use this when you have fileUrl from listpdfs operation or fileName given by user
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -561,7 +552,6 @@ It brings the data previously inserted by other sessions to user's knowledge bas
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -599,7 +589,6 @@ It brings the data previously inserted by other sessions to user's knowledge bas
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -637,7 +626,6 @@ It brings the data previously inserted by other sessions to user's knowledge bas
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -675,7 +663,6 @@ It brings the data previously inserted by other sessions to user's knowledge bas
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -713,7 +700,6 @@ It deletes all the data previously inserted by other sessions to user's knowledg
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -751,7 +737,6 @@ It deletes all the data previously inserted by other sessions to user's knowledg
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -789,7 +774,6 @@ Use it automatically to insert your last response to remember the context in fol
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -827,7 +811,6 @@ Searches internet using the provided query that is recreated by ChatGPT and retu
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -868,7 +851,6 @@ Searches internet using the provided query that is recreated by ChatGPT and retu
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -909,7 +891,6 @@ This plugin uses official Google Plugin so it provides the fastest results avail
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -950,7 +931,6 @@ Use it automatically to insert your last response to remember the context in fol
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
@@ -988,7 +968,6 @@ Use it automatically to insert your last response to remember the context in fol
 
 ```python
 import keymate_api
-from keymate_api.models import operations
 
 s = keymate_api.KeymateAPI(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
