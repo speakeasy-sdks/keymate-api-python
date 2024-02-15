@@ -7,7 +7,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.browse(numofpages='string', percentile='string', q='http://impressive-silence.info', paging='string')
+res = s.browse(numofpages='<value>', percentile='<value>', q='http://impressive-silence.info', paging='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response

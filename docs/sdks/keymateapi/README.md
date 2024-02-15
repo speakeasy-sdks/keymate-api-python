@@ -49,7 +49,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.browse(numofpages='string', percentile='string', q='http://impressive-silence.info', paging='string')
+res = s.browse(numofpages='<value>', percentile='<value>', q='http://impressive-silence.info', paging='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -90,7 +90,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.browse_by_url(numofpages='string', percentile='string', q='http://recent-wish.com', paging='string')
+res = s.browse_by_url(numofpages='<value>', percentile='<value>', q='http://recent-wish.com', paging='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -131,7 +131,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.document(file_name='string', part_id='string', q='string')
+res = s.document(file_name='<value>', part_id='<value>', q='<value>')
 
 if res.object is not None:
     # handle response
@@ -170,7 +170,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.fast(numofpages='string', percentile='string', q='https://moral-zen.info')
+res = s.fast(numofpages='<value>', percentile='<value>', q='https://moral-zen.info')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -272,7 +272,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.hybrid(numofpages='string', percentile='string', q='string')
+res = s.hybrid(numofpages='<value>', percentile='<value>', q='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -312,7 +312,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.insert(q='string')
+res = s.insert(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -349,7 +349,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.keymate(numofpages='string', percentile='string', q='string')
+res = s.keymate(numofpages='<value>', percentile='<value>', q='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -451,7 +451,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.metadatakb(q='string')
+res = s.metadatakb(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -519,7 +519,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.pdfpro(file_name='string', part_id='string', q='string')
+res = s.pdfpro(file_name='<value>', part_id='<value>', q='<value>')
 
 if res.object is not None:
     # handle response
@@ -558,7 +558,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.pdfsearch(q='string')
+res = s.pdfsearch(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -595,7 +595,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.pkb(q='string')
+res = s.pkb(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -632,7 +632,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.query(q='string')
+res = s.query(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -669,7 +669,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.query_users_knowledge_base(q='string')
+res = s.query_users_knowledge_base(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -706,7 +706,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.reset_users_knowledge_base(q='string')
+res = s.reset_users_knowledge_base(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -743,7 +743,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.resetknowledgebase(q='string')
+res = s.resetknowledgebase(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -780,7 +780,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.savetopkb(q='string')
+res = s.savetopkb(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -817,7 +817,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.search(numofpages='string', percentile='string', q='string')
+res = s.search(numofpages='<value>', percentile='<value>', q='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -857,7 +857,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.search_and_browse(numofpages='string', percentile='string', q='string')
+res = s.search_and_browse(numofpages='<value>', percentile='<value>', q='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -897,7 +897,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.ultrafastsearch(numofpages='string', percentile='string', q='https://unfortunate-forearm.info')
+res = s.ultrafastsearch(numofpages='<value>', percentile='<value>', q='https://unfortunate-forearm.info')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -937,7 +937,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.upsert(q='string')
+res = s.upsert(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -974,7 +974,7 @@ s = keymate_api.KeymateAPI(
 )
 
 
-res = s.upsert_to_users_knowledge_base(q='string')
+res = s.upsert_to_users_knowledge_base(q='<value>')
 
 if res.object is not None:
     # handle response
