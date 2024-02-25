@@ -179,3 +179,13 @@ Based on:
 - [python v0.5.1] .
 ### Releases
 - [PyPI v0.5.1] https://pypi.org/project/Keymate-API/0.5.1 - .
+
+## 2024-02-25 00:14:24
+### Changes
+Based on:
+- OpenAPI Doc 1.0.1 
+- Speakeasy CLI 1.193.4 (2.272.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v0.5.2] .
+### Releases
+- [PyPI v0.5.2] https://pypi.org/project/Keymate-API/0.5.2 - .
