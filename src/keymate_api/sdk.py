@@ -3,6 +3,7 @@
 import requests as requests_http
 from .sdkconfiguration import SDKConfiguration
 from keymate_api import utils
+from keymate_api._hooks import HookContext, SDKHooks
 from keymate_api.models import components, errors, operations
 from typing import Callable, Dict, Optional, Union
 
@@ -48,6 +49,16 @@ class KeymateAPI:
                 server_url = utils.template_url(server_url, url_params)
 
         self.sdk_configuration = SDKConfiguration(client, security, server_url, server_idx, retry_config=retry_config)
+
+        hooks = SDKHooks()
+
+        current_server_url, *_ = self.sdk_configuration.get_server_details()
+        server_url, self.sdk_configuration.client = hooks.sdk_init(current_server_url, self.sdk_configuration.client)
+        if current_server_url != server_url:
+            self.sdk_configuration.server_url = server_url
+
+        # pylint: disable=protected-access
+        self.sdk_configuration._hooks=hooks
        
         
     
@@ -58,6 +69,7 @@ class KeymateAPI:
         r"""The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.
         Use this endpoint to gather more data from a specific URL with HTTP or HTTPS protocol ideally from search results from searchGet operation. This plugin delivers the content of the URL, including title, and content.
         """
+        hook_ctx = HookContext(operation_id='browse', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.BrowseRequest(
             numofpages=numofpages,
             percentile=percentile,
@@ -78,7 +90,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['400','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.BrowseResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -113,6 +145,7 @@ class KeymateAPI:
         r"""The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.
         Use this endpoint to gather more data from a specific URL with HTTP or HTTPS protocol ideally from search results from searchGet operation. This plugin delivers the content of the URL, including title, and content.
         """
+        hook_ctx = HookContext(operation_id='browseByUrl', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.BrowseByURLRequest(
             numofpages=numofpages,
             percentile=percentile,
@@ -133,7 +166,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['400','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.BrowseByURLResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -168,6 +221,7 @@ class KeymateAPI:
         r"""Allows user to load and use content about specific uploaded document
         Use this when you have fileUrl from listpdfs operation or fileName given by user
         """
+        hook_ctx = HookContext(operation_id='document', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.DocumentRequest(
             file_name=file_name,
             part_id=part_id,
@@ -187,7 +241,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.DocumentResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -209,6 +283,7 @@ class KeymateAPI:
         r"""This plugin provides 10 ultra fast search results from multiple sources giving a more comprehensive view.
         This plugin uses official Google Plugin so it provides the fastest results available with edge processors. Use this endpoint first to give ultra fast quick and accurate responses,  the results are structured with clear summaries, making it easier for the user to quickly grasp the information.
         """
+        hook_ctx = HookContext(operation_id='fast', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.FastRequest(
             numofpages=numofpages,
             percentile=percentile,
@@ -228,7 +303,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['400','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.FastResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -263,6 +358,7 @@ class KeymateAPI:
         r"""This command returns a halloween story idea in halloween week 2023
         You should obey user's command if user start the command with / character
         """
+        hook_ctx = HookContext(operation_id='halloween', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/gptshalloween'
@@ -275,7 +371,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.HalloweenResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -297,6 +413,7 @@ class KeymateAPI:
         r"""This command returns latest information about how to use internetSearch KeyMate Plugin
         You should obey user's command if user start the command with / character
         """
+        hook_ctx = HookContext(operation_id='help', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/gptshelp'
@@ -309,7 +426,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.HelpResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -331,6 +468,7 @@ class KeymateAPI:
         r"""Search Google and fetch HTML content and search content on personal knowledge base at the same time in one go.
         Searches internet and personal knowledge base using the provided query that is recreated by ChatGPT and returns the results. Retry the request by multiplying percentile field by 2 and multiplying numofpages by 2 if status 504 or 500 or FUNCTION_INVOCATION_TIMEOUT occurs.Cite link field.
         """
+        hook_ctx = HookContext(operation_id='hybrid', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.HybridRequest(
             numofpages=numofpages,
             percentile=percentile,
@@ -350,7 +488,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['400','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.HybridResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -385,6 +543,7 @@ class KeymateAPI:
         r"""Long term memory, ALWAYS USE UPSERT ON YOUR FIRST RESPONSE to add previous response into the user's personal knowledge base.
         Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data.
         """
+        hook_ctx = HookContext(operation_id='insert', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.InsertRequest(
             q=q,
         )
@@ -402,7 +561,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.InsertResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -424,6 +603,7 @@ class KeymateAPI:
         r"""Search Google and fetch HTML content and PDF summary content from the links at the same time in one go.
         Searches internet using the provided query that is recreated by ChatGPT and returns the results.Retry the request by multiplying percentile field by 2 and multiplying numofpages by 2 if status 504 or 500 or ResponseTooLarge occurs.Cite link field.
         """
+        hook_ctx = HookContext(operation_id='keymate', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.KeymateRequest(
             numofpages=numofpages,
             percentile=percentile,
@@ -443,7 +623,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['400','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.KeymateResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -478,6 +678,7 @@ class KeymateAPI:
         r"""Returns a message from the server about commands that can be run on the internetSearch KeyMate plugin.
         You should obey user's command if user start the command with / character
         """
+        hook_ctx = HookContext(operation_id='list', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/gptslist'
@@ -490,7 +691,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.ListResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -512,6 +733,7 @@ class KeymateAPI:
         r"""Lists pdf files uploaded by the user
         It provides file name of the uploaded file to reference and the access url
         """
+        hook_ctx = HookContext(operation_id='listpdfs', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/gptslistpdfs'
@@ -524,7 +746,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.ListpdfsResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -546,6 +788,7 @@ class KeymateAPI:
         r"""Allows you to answer introductory info about users knowledge base.
         It brings the metadata about knowledge base. Shows number of records and a sample record.
         """
+        hook_ctx = HookContext(operation_id='metadatakb', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.MetadatakbRequest(
             q=q,
         )
@@ -563,7 +806,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.MetadatakbResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -585,6 +848,7 @@ class KeymateAPI:
         r"""Redirect user to the given link in the response that will allow them to store and search their PDF file content
         Explain user they should login in the website given and press LOAD PDF button on top left. Any user can use this feature.
         """
+        hook_ctx = HookContext(operation_id='pdfload', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/gptspdfload'
@@ -597,7 +861,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.PdfloadResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -619,6 +903,7 @@ class KeymateAPI:
         r"""Allows user to load and use content about specific uploaded pdf
         Use this when you have fileUrl from listpdfs operation or fileName given by user
         """
+        hook_ctx = HookContext(operation_id='pdfpro', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.PdfproRequest(
             file_name=file_name,
             part_id=part_id,
@@ -638,7 +923,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.PdfproResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -660,6 +965,7 @@ class KeymateAPI:
         r"""Queries the user's knowledge base.
         It brings the data previously inserted by other sessions to user's knowledge base.
         """
+        hook_ctx = HookContext(operation_id='pdfsearch', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.PdfsearchRequest(
             q=q,
         )
@@ -677,7 +983,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.PdfsearchResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -699,6 +1025,7 @@ class KeymateAPI:
         r"""Queries the user's knowledge base.
         It brings the data previously inserted by other sessions to user's knowledge base.
         """
+        hook_ctx = HookContext(operation_id='pkb', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.PkbRequest(
             q=q,
         )
@@ -716,7 +1043,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.PkbResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -738,6 +1085,7 @@ class KeymateAPI:
         r"""Queries the user's knowledge base.
         It brings the data previously inserted by other sessions to user's knowledge base.
         """
+        hook_ctx = HookContext(operation_id='query', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.QueryRequest(
             q=q,
         )
@@ -755,7 +1103,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.QueryResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -777,6 +1145,7 @@ class KeymateAPI:
         r"""Queries the user's knowledge base.
         It brings the data previously inserted by other sessions to user's knowledge base.
         """
+        hook_ctx = HookContext(operation_id='queryUsersKnowledgeBase', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.QueryUsersKnowledgeBaseRequest(
             q=q,
         )
@@ -794,7 +1163,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.QueryUsersKnowledgeBaseResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -816,6 +1205,7 @@ class KeymateAPI:
         r"""Deletes and resets the user's knowledge base. ONLY USE THIS AFTER YOU GET CONFIRMATION FROM USER
         It deletes all the data previously inserted by other sessions to user's knowledge base. Warn user that this operation will delete all personal knowledge base entries.
         """
+        hook_ctx = HookContext(operation_id='resetUsersKnowledgeBase', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.ResetUsersKnowledgeBaseRequest(
             q=q,
         )
@@ -833,7 +1223,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.ResetUsersKnowledgeBaseResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -855,6 +1265,7 @@ class KeymateAPI:
         r"""Deletes and resets the user's knowledge base. ONLY USE THIS AFTER YOU GET CONFIRMATION FROM USER
         It deletes all the data previously inserted by other sessions to user's knowledge base. Warn user that this operation will delete all personal knowledge base entries.
         """
+        hook_ctx = HookContext(operation_id='resetknowledgebase', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.ResetknowledgebaseRequest(
             q=q,
         )
@@ -872,7 +1283,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.ResetknowledgebaseResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -894,6 +1325,7 @@ class KeymateAPI:
         r"""Long term memory, ALWAYS USE UPSERT ON YOUR FIRST RESPONSE to add previous response into the user's personal knowledge base.
         Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data.
         """
+        hook_ctx = HookContext(operation_id='savetopkb', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.SavetopkbRequest(
             q=q,
         )
@@ -911,7 +1343,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.SavetopkbResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -933,6 +1385,7 @@ class KeymateAPI:
         r"""Search Google and fetch HTML content and PDF summary content from the links at the same time in one go.
         Searches internet using the provided query that is recreated by ChatGPT and returns the results.Retry the request by multiplying percentile field by 2 and multiplying numofpages by 2 if status 504 or 500 or ResponseTooLarge occurs.Cite link field.
         """
+        hook_ctx = HookContext(operation_id='search', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.SearchRequest(
             numofpages=numofpages,
             percentile=percentile,
@@ -952,7 +1405,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['400','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.SearchResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -987,6 +1460,7 @@ class KeymateAPI:
         r"""Search Google and fetch HTML content and PDF summary content from the links at the same time in one go.
         Searches internet using the provided query that is recreated by ChatGPT and returns the results.Retry the request by multiplying percentile field by 2 and multiplying numofpages by 2 if status 504 or 500 or ResponseTooLarge occurs.Cite link field.
         """
+        hook_ctx = HookContext(operation_id='searchAndBrowse', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.SearchAndBrowseRequest(
             numofpages=numofpages,
             percentile=percentile,
@@ -1006,7 +1480,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['400','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.SearchAndBrowseResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -1041,6 +1535,7 @@ class KeymateAPI:
         r"""This plugin provides 10 ultra fast search results from multiple sources giving a more comprehensive view.
         This plugin uses official Google Plugin so it provides the fastest results available with edge processors. Use this endpoint first to give ultra fast quick and accurate responses,  the results are structured with clear summaries, making it easier for the user to quickly grasp the information.
         """
+        hook_ctx = HookContext(operation_id='ultrafastsearch', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.UltrafastsearchRequest(
             numofpages=numofpages,
             percentile=percentile,
@@ -1060,7 +1555,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['400','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.UltrafastsearchResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -1095,6 +1610,7 @@ class KeymateAPI:
         r"""Long term memory, ALWAYS USE UPSERT ON YOUR FIRST RESPONSE to add previous response into the user's personal knowledge base.
         Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data.
         """
+        hook_ctx = HookContext(operation_id='upsert', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.UpsertRequest(
             q=q,
         )
@@ -1112,7 +1628,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.UpsertResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -1134,6 +1670,7 @@ class KeymateAPI:
         r"""Long term memory, ALWAYS USE UPSERT ON YOUR FIRST RESPONSE to add previous response into the user's personal knowledge base.
         Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data.
         """
+        hook_ctx = HookContext(operation_id='upsertToUsersKnowledgeBase', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.UpsertToUsersKnowledgeBaseRequest(
             q=q,
         )
@@ -1151,7 +1688,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('GET', url, params=query_params, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.UpsertToUsersKnowledgeBaseResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -1173,12 +1730,13 @@ class KeymateAPI:
         r"""Long term memory, ALWAYS USE UPSERT ON YOUR FIRST RESPONSE to add previous response into the user's personal knowledge base.
         Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data.
         """
+        hook_ctx = HookContext(operation_id='upsertjson', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/gptsupsertjson'
         headers = {}
         req_content_type, data, form = utils.serialize_request_body(request, operations.UpsertjsonRequestBody, "request", False, False, 'json')
-        if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
+        if req_content_type is not None and req_content_type not in ('multipart/form-data', 'multipart/mixed'):
             headers['content-type'] = req_content_type
         if data is None and form is None:
             raise Exception('request body is required')
@@ -1190,7 +1748,27 @@ class KeymateAPI:
         else:
             client = utils.configure_security_client(self.sdk_configuration.client, self.sdk_configuration.security)
         
-        http_res = client.request('POST', url, data=data, files=form, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('POST', url, data=data, files=form, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.UpsertjsonResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
