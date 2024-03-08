@@ -12,5 +12,6 @@ res = s.browse(numofpages='<value>', percentile='<value>', q='http://impressive-
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 <!-- End SDK Example Usage [usage] -->

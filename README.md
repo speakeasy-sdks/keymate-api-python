@@ -40,6 +40,7 @@ res = s.browse(numofpages='<value>', percentile='<value>', q='http://impressive-
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 <!-- End SDK Example Usage [usage] -->
 
@@ -111,6 +112,7 @@ except errors.SDKError as e:
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 <!-- End Error Handling [errors] -->
 
@@ -141,6 +143,7 @@ res = s.browse(numofpages='<value>', percentile='<value>', q='http://impressive-
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 
 
@@ -161,6 +164,7 @@ res = s.browse(numofpages='<value>', percentile='<value>', q='http://impressive-
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 <!-- End Server Selection [server] -->
 
@@ -205,6 +209,7 @@ res = s.browse(numofpages='<value>', percentile='<value>', q='http://impressive-
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 <!-- End Authentication [security] -->
 

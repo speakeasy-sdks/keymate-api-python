@@ -54,6 +54,7 @@ res = s.browse(numofpages='<value>', percentile='<value>', q='http://impressive-
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -95,6 +96,7 @@ res = s.browse_by_url(numofpages='<value>', percentile='<value>', q='http://rece
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -136,6 +138,7 @@ res = s.document(file_name='<value>', part_id='<value>', q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -175,6 +178,7 @@ res = s.fast(numofpages='<value>', percentile='<value>', q='https://moral-zen.in
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -215,6 +219,7 @@ res = s.halloween()
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 
@@ -246,6 +251,7 @@ res = s.help()
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 
@@ -277,6 +283,7 @@ res = s.hybrid(numofpages='<value>', percentile='<value>', q='<value>')
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -317,6 +324,7 @@ res = s.insert(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -354,6 +362,7 @@ res = s.keymate(numofpages='<value>', percentile='<value>', q='<value>')
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -394,6 +403,7 @@ res = s.list()
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 
@@ -425,6 +435,7 @@ res = s.listpdfs()
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 
@@ -456,6 +467,7 @@ res = s.metadatakb(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -493,6 +505,7 @@ res = s.pdfload()
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 
@@ -524,6 +537,7 @@ res = s.pdfpro(file_name='<value>', part_id='<value>', q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -563,6 +577,7 @@ res = s.pdfsearch(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -600,6 +615,7 @@ res = s.pkb(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -637,6 +653,7 @@ res = s.query(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -674,6 +691,7 @@ res = s.query_users_knowledge_base(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -711,6 +729,7 @@ res = s.reset_users_knowledge_base(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -748,6 +767,7 @@ res = s.resetknowledgebase(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -785,6 +805,7 @@ res = s.savetopkb(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -822,6 +843,7 @@ res = s.search(numofpages='<value>', percentile='<value>', q='<value>')
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -862,6 +884,7 @@ res = s.search_and_browse(numofpages='<value>', percentile='<value>', q='<value>
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -902,6 +925,7 @@ res = s.ultrafastsearch(numofpages='<value>', percentile='<value>', q='https://u
 if res.two_hundred_application_json_object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -942,6 +966,7 @@ res = s.upsert(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -979,6 +1004,7 @@ res = s.upsert_to_users_knowledge_base(q='<value>')
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -1020,6 +1046,7 @@ res = s.upsertjson(req)
 if res.object is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
